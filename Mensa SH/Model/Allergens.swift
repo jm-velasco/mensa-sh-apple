@@ -30,4 +30,5 @@ enum Allergens: String, Codable, CaseIterable {
     case Soy = "So"
     case SulfurDioxide = "Sw"
     case Molluscs = "Wt"
+    case Alkohol = "alko"
 }
