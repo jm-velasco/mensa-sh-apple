@@ -13,9 +13,12 @@ struct MealView: View {
         VStack(alignment: .leading) {
             Text(showEmoji ? "\(meal.emoji) \(meal.name)" : meal.name)
                 .bold()
-            
-            if let price = meal.price.getFor(group: priceGroup).formatPrice() {
-                Text(price)
+            HStack{
+                if let price = meal.price.getFor(group: priceGroup).formatPrice() {
+                    Text(price)
+                }
+                Text("| \(meal.location.name)")
+                
             }
         }
     }

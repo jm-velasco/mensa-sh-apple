@@ -2,6 +2,8 @@ import SwiftUI
 
 struct MensaDayListView: View {
     @State var mensaDays: [MensaDay] = []
+    
+    @AppStorage(wrappedValue: .Lübeck, MensaSettings.city) private var city: City
 
     var body: some View {
         ScrollView {
@@ -14,13 +16,10 @@ struct MensaDayListView: View {
             }
             .padding(20)
         }
-        .task {
+        .task(id: city) {
+            mensaDays = []
             requestMensaDays(
-                locations: [
-                    MensaLocation(code: Location.MensaLuebeck.rawValue, name: "Mensa", city: "Lübeck"),
-                    MensaLocation(code: Location.CafeteriaLuebeck.rawValue, name: "Cafeteria", city: "Lübeck"),
-                    MensaLocation(code: Location.BitsAndBytes.rawValue, name: "Bits + Bytes", city: "Lübeck"),
-                ],
+                locations: city.locations,
                 date: Date.now,
                 lang: Language.German,
                 completion: { apiResponse in
